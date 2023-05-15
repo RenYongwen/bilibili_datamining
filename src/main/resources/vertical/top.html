@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Dashboard Template for Bootstrap</title>
+  <!-- Bootstrap core CSS -->
+
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- Custom styles for this template -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/metismenu.min.js"></script>
+  <script src="assets/js/waves.js"></script>
+  <script src="assets/js/simplebar.min.js"></script>
+  <script type="text/javascript" src="assets/js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="assets/js/echarts.min.js"></script>
+
+  <!-- Google Charts js -->
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <!-- Google chart custom js-->
+  <script src="assets/pages/google-chart-demo.js"></script>
+
+
+  <!-- App js -->
+  <script src="assets/js/theme.js"></script>
+  <style type="text/css">
+    /* Chart.js */
+
+    @-webkit-keyframes chartjs-render-animation {
+      from {
+        opacity: 0.99
+      }
+      to {
+        opacity: 1
+      }
+    }
+
+    @keyframes chartjs-render-animation {
+      from {
+        opacity: 0.99
+      }
+      to {
+        opacity: 1
+      }
+    }
+
+    .chartjs-render-monitor {
+      -webkit-animation: chartjs-render-animation 0.001s;
+      animation: chartjs-render-animation 0.001s;
+    }
+  </style>
+</head>
+
+<body>
+<div id="layout-wrapper">
+  <div th:insert="bar::left"></div>
+  <header th:insert="bar::#page-topbar"></header>
+  <footer th:insert="bar::#page-footer"></footer>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="main-content">
+        <div class="page-content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="card card-animate">
+                  <div class="card-body" >
+                    <div class="dropdown float-right position-relative">
+                      <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                         aria-expanded="false">
+                        <i class="mdi mdi-dots-vertical"></i>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#" class="dropdown-item">查看源数据</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a href="/charts_tag.do" class="dropdown-item">查看分析</a></li>
+                      </ul>
+                    </div>
+                    <h4 class="card-title d-inline-block">分区热榜综合评分</h4>
+                    <div id="main1" style="width: 950px;height: 600px;"></div>
+                    <script type="text/javascript">
+                      $(function () {
+                        var chartDom = document.getElementById('main1');
+                        var myChart = echarts.init(chartDom);
+                        var option;
+                        var gcscore = new Array();
+                        var ctscore = new Array();
+
+                        $.get("/findpartall.do", function (data) {
+                                  console.log(data)
+                                  for(i=0;i<10;i++){
+                                    gcscore.push(data[i].score)
+                                  }
+                                  for(i=100;i<110;i++){
+                                    ctscore.push(data[i].score)
+                                  }
+                                  option = {
+                                    color: ['#80FFA5'],
+
+                                    tooltip: {
+                                      trigger: 'axis',
+                                      axisPointer: {
+                                        type: 'cross',
+                                        label: {
+                                          backgroundColor: '#6a7985'
+                                        }
+                                      }
+                                    },
+
+                                    toolbox: {
+                                      feature: {
+                                        saveAsImage: {}
+                                      }
+                                    },
+                                    grid: {
+                                      left: '3%',
+                                      right: '4%',
+                                      bottom: '3%',
+                                      containLabel: true
+                                    },
+                                    xAxis: [
+                                      {
+                                        type: 'category',
+                                        boundaryGap: false,
+                                        data: ['第一','第二','第三','第四','第五','第六','第七','第八','第九','第十']
+                                      }
+                                    ],
+                                    yAxis: [
+                                      {
+                                        type: 'value'
+                                      }
+                                    ],
+                                    series: [
+                                      {
+                                        name: '国创分区综合评分',
+                                        type: 'line',
+                                        stack: '总量',
+                                        smooth: true,
+                                        lineStyle: {
+                                          width: 0
+                                        },
+                                        showSymbol: false,
+                                        areaStyle: {
+                                          opacity: 0.8,
+                                          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                            offset: 0,
+                                            color: 'rgba(128, 255, 165)'
+                                          }, {
+                                            offset: 1,
+                                            color: 'rgba(1, 191, 236)'
+                                          }])
+                                        },
+                                        emphasis: {
+                                          focus: 'series'
+                                        },
+                                        data:gcscore
+                                      },
+                                      {
+                                        name: '动画分区综合评分',
+                                        type: 'line',
+                                        stack: '总量',
+                                        smooth: true,
+                                        lineStyle: {
+                                          width: 0
+                                        },
+                                        showSymbol: false,
+                                        label: {
+                                          show: true,
+                                          position: 'top'
+                                        },
+                                        areaStyle: {
+                                          opacity: 0.8,
+                                          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                            offset: 0,
+                                            color: 'rgba(255, 191, 0)'
+                                          }, {
+                                            offset: 1,
+                                            color: 'rgba(224, 62, 76)'
+                                          }])
+                                        },
+                                        emphasis: {
+                                          focus: 'series'
+                                        },
+                                        data: ctscore
+                                      }
+
+                                    ]
+                                  };
+
+                                  option && myChart.setOption(option);
+                                },
+                                "json")
+                      })
+
+                    </script>
+
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="card card-animate">
+                  <div class="card-body" >
+                    <div class="dropdown float-right position-relative">
+                      <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                         aria-expanded="false">
+                        <i class="mdi mdi-dots-vertical"></i>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#" class="dropdown-item">查看源数据</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a href="/charts_tag.do" class="dropdown-item">查看分析</a></li>
+                      </ul>
+                    </div>
+                    <h4 class="card-title d-inline-block">全站热榜前十播放量排行</h4>
+                    <div id="main2" style="width: 950px;height: 600px;"></div>
+                    <script type="text/javascript">
+                      $(function () {
+                        var chartDom = document.getElementById('main2');
+                        var myChart = echarts.init(chartDom);
+                        var option;
+                        var view = new Array();
+                        $.get("findtopall.do", function (data) {
+                                  console.log(data)
+
+                                  var dataAxis = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
+                                  for (var i = 0; i < 10; i++) {
+                                    view.push(data[i].view);
+                                  }
+                                  //var data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
+                                  var yMax = 1000;
+                                  var dataShadow = [];
+
+                                  for (var j = 0; j < data.length; j++) {
+                                    dataShadow.push(yMax);
+                                  }
+
+                                  option = {
+
+                                    xAxis: {
+                                      data: dataAxis,
+                                      axisLabel: {
+                                        inside: true,
+                                        textStyle: {
+                                          color: '#fff'
+                                        }
+                                      },
+                                      axisTick: {
+                                        show: false
+                                      },
+                                      axisLine: {
+                                        show: false
+                                      },
+                                      z: 10
+                                    },
+                                    yAxis: {
+                                      axisLine: {
+                                        show: false
+                                      },
+                                      axisTick: {
+                                        show: false
+                                      },
+                                      axisLabel: {
+                                        textStyle: {
+                                          color: '#999'
+                                        }
+                                      }
+                                    },
+                                    dataZoom: [
+                                      {
+                                        type: 'inside'
+                                      }
+                                    ],
+                                    series: [
+                                      {
+                                        type: 'bar',
+                                        showBackground: true,
+                                        itemStyle: {
+                                          color: new echarts.graphic.LinearGradient(
+                                                  0, 0, 0, 1,
+                                                  [
+                                                    {offset: 0, color: '#83bff6'},
+                                                    {offset: 0.5, color: '#188df0'},
+                                                    {offset: 1, color: '#188df0'}
+                                                  ]
+                                          )
+                                        },
+                                        emphasis: {
+                                          itemStyle: {
+                                            color: new echarts.graphic.LinearGradient(
+                                                    0, 0, 0, 1,
+                                                    [
+                                                      {offset: 0, color: '#2378f7'},
+                                                      {offset: 0.7, color: '#2378f7'},
+                                                      {offset: 1, color: '#83bff6'}
+                                                    ]
+                                            )
+                                          }
+                                        },
+                                        data: view
+                                      }
+                                    ]
+                                  };
+
+// Enable data zoom when user click bar.
+                                  var zoomSize = 6;
+                                  myChart.on('click', function (params) {
+                                    console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+                                    myChart.dispatchAction({
+                                      type: 'dataZoom',
+                                      startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
+                                      endValue: dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
+                                    });
+                                  });
+
+                                  option && myChart.setOption(option);
+                                },
+                                "json")
+                      })
+                    </script>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="card card-animate">
+                  <div class="card-body" >
+                    <div class="dropdown float-right position-relative">
+                      <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                         aria-expanded="false">
+                        <i class="mdi mdi-dots-vertical"></i>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#" class="dropdown-item">查看源数据</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a href="/charts_tag.do" class="dropdown-item">查看分析</a></li>
+                      </ul>
+                    </div>
+                    <h4 class="card-title d-inline-block">总站热榜前五投币量分析</h4>
+                    <div id="main3" style="width: 950px;height: 600px;"></div>
+                    <script type="text/javascript">
+                      $(function () {
+                        var chartDom = document.getElementById('main3');
+                        var myChart = echarts.init(chartDom);
+                        // var mycharts =echarts.init(document.getElementById("main3"));
+                        var coin = new Array();
+                        $.get("/findtopall.do",function (data) {
+                          console.log(data)
+                          for (i=0;i<5;i++){
+                            coin.push(data[i].coin);
+                          }
+                          var option;
+
+                          option = {
+                            legend: {
+                              top: 'bottom'
+                            },
+                            toolbox: {
+                              show: true,
+                              feature: {
+                                mark: {show: true},
+                                dataView: {show: true, readOnly: false},
+                                restore: {show: true},
+                                saveAsImage: {show: true}
+                              }
+                            },
+                            series: [
+                              {
+                                name: '面积模式',
+                                type: 'pie',
+                                radius: [50, 250],
+                                center: ['50%', '50%'],
+                                roseType: 'area',
+                                itemStyle: {
+                                  borderRadius: 5
+                                },
+                                data: [
+                                  {value: coin[0], name: 'First'},
+                                  {value: coin[1], name: 'Second'},
+                                  {value: coin[2], name: 'Third'},
+                                  {value: coin[3], name: 'Forth'},
+                                  {value: coin[4], name: 'Fifth'}
+                                ]
+                              }
+                            ]
+                          };
+
+                          option && myChart.setOption(option);
+
+
+                        },"json")
+                      })
+                    </script>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="card card-animate">
+                  <div class="card-body" >
+                    <div class="dropdown float-right position-relative">
+                      <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                         aria-expanded="false">
+                        <i class="mdi mdi-dots-vertical"></i>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#" class="dropdown-item">查看源数据</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a href="/charts_tag.do" class="dropdown-item">查看分析</a></li>
+                      </ul>
+                    </div>
+                    <h4 class="card-title d-inline-block">全站热榜播放量、弹幕、投币量、点赞量、分享次数关系图</h4>
+                    <div id="main4" style="width: 950px;height: 600px;"></div>
+                    <script type="text/javascript">
+                      $(function () {
+                        var chartDom = document.getElementById('main4');
+                        var myChart = echarts.init(chartDom);
+                        var view = new Array();
+                        var bullet = new Array();
+                        var coin = new Array();
+                        var like =new Array();
+                        var share =new Array();
+                        $.get("/findtopall.do",function (data) {
+                          console.log(data)
+                          var option;
+                          for(i=0;i<7;i++){
+                            view.push(data[i].view);
+                            bullet.push(data[i].bullet);
+                            coin.push(data[i].coin);
+                            like.push(data[i].like);
+                            share.push(data[i].share);
+
+                          }
+                          option = {
+
+                            tooltip: {
+                              trigger: 'axis'
+                            },
+                            legend: {
+                              data: ['播放量','弹幕', '投币','点赞量','分享']
+                            },
+                            grid: {
+                              left: '3%',
+                              right: '4%',
+                              bottom: '3%',
+                              containLabel: true
+                            },
+                            toolbox: {
+                              feature: {
+                                saveAsImage: {}
+                              }
+                            },
+                            xAxis: {
+                              type: 'category',
+                              boundaryGap: false,
+                              data: ['一', '二', '三', '四', '五', '六', '七']
+                            },
+                            yAxis: {
+                              type: 'value'
+                            },
+                            series: [
+                              {
+                                name: '播放量',
+                                type: 'line',
+                                stack: '总量',
+                                data: view
+                              },
+                              {
+                                name: '弹幕',
+                                type: 'line',
+                                stack: '总量',
+                                data: bullet
+                              },
+                              {
+                                name: '投币',
+                                type: 'line',
+                                stack: '总量',
+                                data: coin
+                              },
+                              {
+                                name: '点赞量',
+                                type: 'line',
+                                stack: '总量',
+                                data: like
+                              },
+                              {
+                                name: '分享',
+                                type: 'line',
+                                stack: '总量',
+                                data: share
+                              }
+                            ]
+                          };
+
+                          option && myChart.setOption(option);
+
+                        },"json")
+
+                      })
+
+                    </script>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+
+</body>
+
+</html>

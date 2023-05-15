@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nk.dao.ShowDAO">
+    <select id="findPlaceNum" resultType="Showcity">
+        select city,count(*) as num from `show` group by city
+    </select>
+    <select id="findShowAll" resultType="Show">
+        select * from `show` order by `time` desc
+    </select>
+    <select id="findAvgPrice" resultType="Showcity">
+        select city,avg(price_low)/100 as cityprice from `show` group by city
+    </select>
+    <select id="findMainCity" resultType="Showcity">
+        select city,count(*) as num from `show` group by city HAVING num>2
+    </select>
+    <select id="findMaxMinPrice" resultType="Showprice">
+        select count(*) as num,city as name,min(price_low)/100 as minprice,max(price_high)/100 as maxprice,avg(price_low)/100 as avglow,avg(price_high)/100 as avghigh
+        from `show`
+        GROUP BY city
+        having num>2
+        ORDER BY num desc
+    </select>
+</mapper>

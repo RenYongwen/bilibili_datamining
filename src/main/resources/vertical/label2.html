@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Opatix - Admin & Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="MyraStudio" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        <div th:insert="bar::left"></div>
+        <header th:insert="bar::#page-topbar"></header>
+        <footer th:insert="bar::#page-footer"></footer>
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0 font-size-18">Starter</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Opatix</a></li>
+                                        <li class="breadcrumb-item active">Team Members</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                    <div class="row">
+                        <div class="col-12">
+                             <div class="card card-animate">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <form class="form-inline">
+                                                <div class="form-group">
+                                                    <label for="inputPassword2" class="mr-2">Search: </label>
+                                                    <input type="search" class="form-control" id="inputPassword2" placeholder="Search...">
+                                                </div>
+                                                <div class="form-group mx-sm-3">
+                                                    <label for="status-select" class="mr-2">Sort By: </label>
+                                                    <select class="custom-select" id="status-select">
+                                                        <option selected="">All</option>
+                                                        <option value="1">Name</option>
+                                                        <option value="2">Post</option>
+                                                        <option value="3">Followers</option>
+                                                        <option value="4">Followings</option>
+                                                    </select>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="text-lg-right mt-3 mt-lg-0">
+                                                <button type="button" class="btn btn-success mr-1"><i class="mdi mdi-cog"></i></button>
+                                                <a href="#" class="btn btn-danger"><i class="mdi mdi-plus-circle mr-1"></i> Add New</a>
+                                            </div>
+                                        </div><!-- end col-->
+                                    </div> <!-- end row -->
+                                </div>
+                            </div> <!-- end card-box -->
+                        </div><!-- end col-->
+                    </div>
+                    <!-- end row -->
+
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-6">
+                            <div class="card card-animate">
+                                <img class="card-img-top img-fluid" src="assets/images/opera/5.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="mb-1"><a href="https://www.bilibili.com/bangumi/play/ss38627/" class="text-dark"  style="height: 40px">银魂 第三季</a> </h5>
+                                    <p class="text-muted font-size-13"  style="height: 20px">全51话</p>
+                                    <p class="text-muted" style="height: 600px">
+                                        本作由【唤石者】与【怪异的访客】两个人气短篇集锦而成。讲述生来便能看见各种妖怪的夏目，与自称保镖的猫咪老师一同邂逅的一系列温暖故事。
+                                        【唤石者】一天夏目在森林中遇到一只小妖怪——密实。密实称自己肩负「唤石者」之责，负责将妖怪「岩铁」从沉睡中唤醒。
+                                        然而垂涎任务完成后的美酒奖励，猫咪老师与一众妖怪却计划着取而代之。夏目担心密实，于是伸出了援手……
+                                        【怪异的访客】田沼的身边出现了一位「怪异的访客」。他每天都会来拜访田沼，只说会儿话便离开。
+                                        夏目得知这位怪异的访客其实是妖怪，因此很担心自己的同学田沼。然而田沼却逐渐喜欢上了与之交流。
+                                        虽然这妖怪似乎无意作恶，但田沼的身体却每况愈下……
+                                </div>
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+
+                        <div class="col-xl-3 col-lg-6">
+                            <div class="card card-animate">
+                                <img class="card-img-top img-fluid" src="assets/images/opera/6.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="mb-1"><a href="https://www.bilibili.com/bangumi/play/ss38627/" class="text-dark"  style="height: 40px">银魂 第二季</a> </h5>
+                                    <p class="text-muted font-size-13"  style="height: 20px">全64话</p>
+                                    <p class="text-muted" style="height: 600px">
+                                        随着天人（宇宙人）的袭击，城镇和整个江户的价值观发生了改变，宇宙人、高层建筑、摩托车什么的都出现在了世界上。此时依然存在着有着不变灵魂的最后的武士，这个男人的名字是坂田银时，通称万事屋・阿银。阿银是个马虎、鲁莽并且超爱甜食的人，每天在悠哉和若无其事中度过。在与伙伴们共度的时光中，阿银过着充满着笑与泪的温暖生活。                                </div>
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+
+                        <div class="col-xl-3 col-lg-6">
+                            <div class="card card-animate">
+                                <img class="card-img-top img-fluid" src="assets/images/opera/7.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="mb-1"><a href="https://www.bilibili.com/bangumi/play/ss38627/" class="text-dark"  style="height: 40px">银魂</a> </h5>
+                                    <p class="text-muted font-size-13"  style="height: 20px">全201话</p>
+                                    <p class="text-muted" style="height: 600px">
+                                        江户时代末期， 被称为“天人”的谜之异星人来袭。于是地球人与天人之间的战争瞬即爆发，为数众多的武士和攘夷派志士都参与与天人的战斗，幕府见识到天人强大的实力后，最终向天人低头，放弃武士不管，擅自与天人签订不平等条约，准许他们入国。其后更颁布了“废刀令”，夺走了武士的刀，使他们无力反抗。自此，天人横行霸道，幕府为天人所影响，甚至被控制，成为了“傀儡政权”。在这样的时代，有一个武士与同伴愉快地过著异想天开的生活。
+                                </div>
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+
+                        <div class="col-xl-3 col-lg-6">
+                            <div class="card card-animate">
+                                <img class="card-img-top img-fluid" src="assets/images/opera/8.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="mb-1"><a href="https://www.bilibili.com/bangumi/play/ss38627/" class="text-dark"  style="height: 40px">岸边露伴 一动也不动</a> </h5>
+                                    <p class="text-muted font-size-13"  style="height: 20px">全4话</p>
+                                    <p class="text-muted" style="height: 600px">
+                                        本作是在「JOJO的奇妙冒险 不灭钻石」中登场的漫画家・岸边露伴，
+                                        为了收集漫画的素材而前往各地后所遭遇的奇妙见闻集！
+                                </div>
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+                    </div>
+                    <!-- end row-->
+
+
+                    <div class="row">
+                        <div class="col-12">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-end">
+                                    <li class="page-item">
+                                        <a class="page-link" href="label1.html" tabindex="-1">Previous</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="label1.html">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="label2.html">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="label3.html">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="label4.html">4</a></li>
+                                    <li class="page-item"><a class="page-link" href="label5.html">5</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="label3.html">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- end row-->
+
+                </div> <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+    <!-- Overlay-->
+    <div class="menu-overlay"></div>
+
+
+    <!-- jQuery  -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/metismenu.min.js"></script>
+    <script src="assets/js/waves.js"></script>
+    <script src="assets/js/simplebar.min.js"></script>
+
+    <!-- App js -->
+    <script src="assets/js/theme.js"></script>
+
+</body>
+
+</html>

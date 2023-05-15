@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Opatix - Admin & Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="MyraStudio" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        <div th:insert="bar::left"></div>
+        <header th:insert="bar::#page-topbar"></header>
+        <footer th:insert="bar::#page-footer"></footer>
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0 font-size-18">Starter</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Opatix</a></li>
+                                        <li class="breadcrumb-item active">Team Members</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                    <div class="row">
+                        <div class="col-12">
+                             <div class="card card-animate">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <form class="form-inline">
+                                                <div class="form-group">
+                                                    <label for="inputPassword2" class="mr-2">Search: </label>
+                                                    <input type="search" class="form-control" id="inputPassword2" placeholder="Search...">
+                                                </div>
+                                                <div class="form-group mx-sm-3">
+                                                    <label for="status-select" class="mr-2">Sort By: </label>
+                                                    <select class="custom-select" id="status-select">
+                                                        <option selected="">All</option>
+                                                        <option value="1">Name</option>
+                                                        <option value="2">Post</option>
+                                                        <option value="3">Followers</option>
+                                                        <option value="4">Followings</option>
+                                                    </select>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="text-lg-right mt-3 mt-lg-0">
+                                                <button type="button" class="btn btn-success mr-1"><i class="mdi mdi-cog"></i></button>
+                                                <a href="#" class="btn btn-danger"><i class="mdi mdi-plus-circle mr-1"></i> Add New</a>
+                                            </div>
+                                        </div><!-- end col-->
+                                    </div> <!-- end row -->
+                                </div>
+                            </div> <!-- end card-box -->
+                        </div><!-- end col-->
+                    </div>
+                    <!-- end row -->
+
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-6">
+                            <div class="card card-animate">
+                                <img class="card-img-top img-fluid" src="assets/images/opera/17.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="mb-1"><a href="https://www.bilibili.com/bangumi/play/ss38627/" class="text-dark"  style="height: 40px">吹响吧！上低音号～誓言的终章～</a> </h5>
+                                    <p class="text-muted font-size-13"  style="height: 20px">全1话</p>
+                                    <p class="text-muted" style="height: 600px">
+                                        【故事接第二季后的完全新作】
+                                        北宇治高中吹奏乐部去年顺利地在全日本吹奏乐大赛出场。
+                                        升入二年级的黄前久美子，和三年级的加部友惠一起开始负责指导从四月开始新加入的一年级生们。
+                                        是进入了全国大赛的学校，自然有很多一年级生入部。其中，有四名新生来到了低音声部。
+                                        乍一看似乎毫无问题的久石奏。不融入周围的铃木美玲。想要和美玲做朋友的铃木五月。不提及自身事情的月永求。
+                                        Sunrise祭、选拔赛、以及竞演会。以“全国大赛金奖”为目标的吹奏乐部，却接连发生了问题……！？
+                                        北宇治高中吹奏乐部，风波不断的日子开始了！
+                                </div>
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+
+                        <div class="col-xl-3 col-lg-6">
+                            <div class="card card-animate">
+                                <img class="card-img-top img-fluid" src="assets/images/opera/18.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="mb-1"><a href="https://www.bilibili.com/bangumi/play/ss38627/" class="text-dark"  style="height: 40px">吹响吧！上低音号 第二季</a> </h5>
+                                    <p class="text-muted font-size-13"  style="height: 20px">全13话</p>
+                                    <p class="text-muted" style="height: 600px">
+                                        吹奏乐竞赛京都府大赛。在那里漂亮地取得金奖的北宇治高中吹奏乐部，向着下一个舞台·强豪云集的关西大赛发起挑战……！
+                                </div>
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+
+                        <div class="col-xl-3 col-lg-6">
+                            <div class="card card-animate">
+                                <img class="card-img-top img-fluid" src="assets/images/opera/19.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="mb-1"><a href="https://www.bilibili.com/bangumi/play/ss38627/" class="text-dark"  style="height: 40px">高分少女 第二季</a> </h5>
+                                    <p class="text-muted font-size-13"  style="height: 20px">全9话</p>
+                                    <p class="text-muted" style="height: 600px">
+                                        【本片该季度自#13起，#13-15话为OVA，不进行跟播】喜欢游戏的少年，因为游戏与少女相遇。
+                                        对胜利的渴望，对技术的追求，对自尊的维护，在游戏中心孕育的友情与爱慕。依靠着来自朋友、家庭和游戏角色对内心的支撑，少年少女们也在不断的成长，只要继续坚持就能无限续关？
+                                        春雄、晶、小春挑战最终关卡的结果究竟是？
+                                </div>
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+
+                        <div class="col-xl-3 col-lg-6">
+                            <div class="card card-animate">
+                                <img class="card-img-top img-fluid" src="assets/images/opera/20.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="mb-1"><a href="https://www.bilibili.com/bangumi/play/ss38627/" class="text-dark"  style="height: 40px">游戏人生 零</a> </h5>
+                                    <p class="text-muted font-size-13"  style="height: 20px">全1话</p>
+                                    <p class="text-muted" style="height: 600px">
+                                        距今超过六千年的远古世界，天地割裂的凄惨战争持续不断，毫无还手之力的人类被拥有强大力量的各个种族逼入绝境，濒临灭亡。此时率领人类的年轻领袖里克，与机凯种少女休比偶然相遇。被同伴抛弃的休比，为了修复故障，拜托里克把“人类的心”告诉自己。机凯种少女的单纯与真诚，使得里克对休比逐渐放下戒备、敞开心扉，二人感情亦日渐升温。最终二人带领人类共同面对终极一战，少女休比也将面临恋人与生命的残酷抉择。末日来临，在251秒的时间里，赌上一场深情告白。
+                                </div>
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+                    </div>
+                    <!-- end row-->
+
+
+                    <div class="row">
+                        <div class="col-12">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-end">
+                                    <li class="page-item">
+                                        <a class="page-link" href="label4.html" tabindex="-1">Previous</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="label1.html">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="label2.html">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="label3.html">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="label4.html">4</a></li>
+                                    <li class="page-item"><a class="page-link" href="label5.html">5</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="label5.html">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- end row-->
+
+                </div> <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+    <!-- Overlay-->
+    <div class="menu-overlay"></div>
+
+
+    <!-- jQuery  -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/metismenu.min.js"></script>
+    <script src="assets/js/waves.js"></script>
+    <script src="assets/js/simplebar.min.js"></script>
+
+    <!-- App js -->
+    <script src="assets/js/theme.js"></script>
+
+</body>
+
+</html>

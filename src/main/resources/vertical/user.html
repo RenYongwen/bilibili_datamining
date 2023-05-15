@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>频道信息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="MyraStudio" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="assets/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="assets/js/echarts.min.js"></script>
+
+</head>
+
+<body>
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        <div th:insert="bar::left"></div>
+        <header th:insert="bar::#page-topbar"></header>
+        <footer th:insert="bar::#page-footer"></footer>
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="card card-animate">
+                                <div class="card-body" >
+                                    <div class="dropdown float-right position-relative">
+                                        <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                                           aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="#" class="dropdown-item">查看源数据</a></li>
+                                            <li class="dropdown-divider"></li>
+                                            <li><a href="/charts_tag.do" class="dropdown-item">查看分析</a></li>
+                                        </ul>
+                                    </div>
+                                    <h4 class="card-title d-inline-block">各个id段等级分布</h4>
+                                    <div id="main1" style="width: 600px; height: 400px;"></div>
+                                    <script type="text/javascript">
+                                        $(function () { //页面加载的时候就会执行该函数。
+                                            var myecharts =echarts.init(document.getElementById("main1"));
+                                            var points = [];
+                                            $.get("/charts_user.do",function (data) {
+                                                for (i=0;i<data.length;i++){
+                                                    points.push([data[i].id,data[i].level]);
+                                                }
+                                                option = {
+                                                    title : {
+                                                        text : 'level与id关系'
+                                                    },
+                                                    color: '#877de8',
+                                                    xAxis: {},
+                                                    yAxis: {},
+                                                    series: [{
+                                                        symbolSize: 5,
+                                                        data: points,
+                                                        type: 'scatter'
+                                                    }]
+                                                };
+                                                myecharts.setOption(option);
+                                            },"json")
+                                        })
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card card-animate">
+                                <div class="card-body" >
+                                    <div class="dropdown float-right position-relative">
+                                        <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                                           aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="#" class="dropdown-item">查看源数据</a></li>
+                                            <li class="dropdown-divider"></li>
+                                            <li><a href="/charts_tag.do" class="dropdown-item">查看分析</a></li>
+                                        </ul>
+                                    </div>
+                                    <h4 class="card-title d-inline-block">level的比例</h4>
+                                    <div id="main2" style="width: 600px; height: 400px;"></div>
+                                    <script type="text/javascript">
+                                        $(function () { //页面加载的时候就会执行该函数。
+                                            var myecharts =echarts.init(document.getElementById("main2"));
+                                            var level1 = 0;
+                                            var level2 = 0;
+                                            var level3 = 0;
+                                            var level4 = 0;
+                                            var level5 = 0;
+                                            var level6 = 0;
+                                            $.get("/charts_user.do",function (data) {
+                                                for (i=0;i<data.length;i++){
+                                                    switch (data[i].level){
+                                                        case 1:
+                                                            level1+=1;
+                                                            break;
+                                                        case 2:
+                                                            level2+=1;
+                                                            break;
+                                                        case 3:
+                                                            level3+=1;
+                                                            break;
+                                                        case 4:
+                                                            level4+=1;
+                                                            break;
+                                                        case 5:
+                                                            level5+=1;
+                                                            break;
+                                                        case 6:
+                                                            level6+=1;
+                                                    }
+                                                }
+                                                var option = {
+                                                    color:["#574bd6", "#6d61ea", "#877de8", "#9b94da", "#c5bff5"],
+                                                    legend: {
+                                                        top: '5%',
+                                                        left: 'center'
+                                                    },
+                                                    series: [
+                                                        {
+                                                            type: 'pie',
+                                                            radius: ['40%', '70%'],
+                                                            avoidLabelOverlap: false,
+                                                            itemStyle: {
+                                                                borderRadius: 10,
+                                                                borderColor: '#fff',
+                                                                borderWidth: 2
+                                                            },
+                                                            label: {
+                                                                show: false,
+                                                                position: 'center'
+                                                            },
+                                                            emphasis: {
+                                                                label: {
+                                                                    show: true,
+                                                                    fontSize: '40',
+                                                                    fontWeight: 'bold'
+                                                                }
+                                                            },
+                                                            labelLine: {
+                                                                show: false
+                                                            },
+                                                            data: [
+                                                                {value: level1, name: 'level1'},
+                                                                {value: level2, name: 'level2'},
+                                                                {value: level3, name: 'level3'},
+                                                                {value: level4, name: 'level4'},
+                                                                {value: level5, name: 'level5'},
+                                                                {value: level6, name: 'level6'}
+                                                            ]
+                                                        }
+                                                    ]};
+                                                myecharts.setOption(option);
+                                            },"json")
+                                        })
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card card-animate">
+                                <div class="card-body" >
+                                    <div class="dropdown float-right position-relative">
+                                        <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                                           aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="#" class="dropdown-item">查看源数据</a></li>
+                                            <li class="dropdown-divider"></li>
+                                            <li><a href="/charts_tag.do" class="dropdown-item">查看分析</a></li>
+                                        </ul>
+                                    </div>
+                                    <h4 class="card-title d-inline-block">性别比例</h4>
+                                    <div id="main3" style="width: 600px; height: 400px;"></div>
+                                    <script type="text/javascript">
+                                        $(function () { //页面加载的时候就会执行该函数。
+                                            var myecharts =echarts.init(document.getElementById("main3"));
+                                            var male = 0;
+                                            var female = 0;
+                                            $.get("/charts_user.do",function (data) {
+                                                for (i=0;i<data.length;i++){
+                                                    switch (data[i].sex){
+                                                        case "男":
+                                                            male+=1;
+                                                            break;
+                                                        case "女":
+                                                            female+=1;
+                                                    }
+                                                }
+                                                var option = {
+                                                    color:["#574bd6","#9b94da"],
+                                                    legend: {
+                                                        top: '5%',
+                                                        left: 'center'
+                                                    },
+                                                    series: [
+                                                        {
+                                                            type: 'pie',
+                                                            radius: ['40%', '70%'],
+                                                            avoidLabelOverlap: false,
+                                                            itemStyle: {
+                                                                borderRadius: 10,
+                                                                borderColor: '#fff',
+                                                                borderWidth: 2
+                                                            },
+                                                            label: {
+                                                                show: false,
+                                                                position: 'center'
+                                                            },
+                                                            emphasis: {
+                                                                label: {
+                                                                    show: true,
+                                                                    fontSize: '40',
+                                                                    fontWeight: 'bold'
+                                                                }
+                                                            },
+                                                            labelLine: {
+                                                                show: false
+                                                            },
+                                                            data: [
+                                                                {value: male, name: '男'},
+                                                                {value: female, name: '女'}
+                                                            ]
+                                                        }
+                                                    ]};
+                                                myecharts.setOption(option);
+                                            },"json")
+                                        })
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                    <!-- end row-->
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">User Information</h4>
+                                    <p class="card-subtitle mb-4">
+                                        Here are some informations of some users.
+                                    </p>
+
+                                    <table id="state-saving-datatable" class="table activate-select dt-responsive nowrap">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Sex</th>
+                                            <th>Sign</th>
+                                            <th>Rank</th>
+                                            <th>Birthday</th>
+                                            <th>Level</th>
+                                            <th>Coins</th>
+                                            <th>Following</th>
+                                            <th>Fans</th>
+                                            <th>ArchiveView</th>
+                                            <th>Article</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <tr th:each="user:${users}">
+                                            <td th:text="${user.id}"></td>
+                                            <td th:text="${user.name}"></td>
+                                            <td th:text="${user.sex}"></td>
+                                            <td th:text="${user.sign}"></td>
+                                            <td th:text="${user.rank}"></td>
+                                            <td th:text="${user.birthday}"></td>
+                                            <td th:text="${user.level}"></td>
+                                            <td th:text="${user.coins}"></td>
+                                            <td th:text="${user.following}"></td>
+                                            <td th:text="${user.fans}"></td>
+                                            <td th:text="${user.archiveview}"></td>
+                                            <td th:text="${user.article}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div> <!-- end card body-->
+                            </div> <!-- end card -->
+                        </div><!-- end col-->
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+    <!-- END layout-wrapper -->
+
+    <!-- Overlay-->
+    <div class="menu-overlay"></div>
+
+
+    <!-- jQuery  -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/metismenu.min.js"></script>
+    <script src="assets/js/waves.js"></script>
+    <script src="assets/js/simplebar.min.js"></script>
+
+    <!-- Morris Js-->
+    <script src="plugins/morris-js/morris.min.js"></script>
+    <!-- Raphael Js-->
+    <script src="plugins/raphael/raphael.min.js"></script>
+
+    <!-- Morris Custom Js-->
+    <script src="assets/pages/dashboard-demo.js"></script>
+
+    <!-- App js -->
+    <script src="assets/js/theme.js"></script>
+
+
+
+    <!-- third party js -->
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables/dataTables.bootstrap4.js"></script>
+    <script src="plugins/datatables/dataTables.responsive.min.js"></script>
+    <script src="plugins/datatables/responsive.bootstrap4.min.js"></script>
+    <script src="plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="plugins/datatables/buttons.bootstrap4.min.js"></script>
+    <script src="plugins/datatables/buttons.html5.min.js"></script>
+    <script src="plugins/datatables/buttons.flash.min.js"></script>
+    <script src="plugins/datatables/buttons.print.min.js"></script>
+    <script src="plugins/datatables/dataTables.keyTable.min.js"></script>
+    <script src="plugins/datatables/dataTables.select.min.js"></script>
+    <script src="plugins/datatables/pdfmake.min.js"></script>
+    <script src="plugins/datatables/vfs_fonts.js"></script>
+    <!-- third party js ends -->
+
+    <!-- Datatables init -->
+    <script src="assets/pages/datatables-demo.js"></script>
+
+
+
+</body>
+
+</html>

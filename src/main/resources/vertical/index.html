@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>bilibili</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="MyraStudio" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    <div th:insert="bar::left"></div>
+    <header th:insert="bar::#page-topbar"></header>
+    <footer th:insert="bar::#page-footer"></footer>
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0 font-size-18">Bilibili</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Gogogo</a></li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="avatar-sm float-right">
+                                    <span class="avatar-title bg-soft-primary rounded-circle">
+                                        <i class="bx bx-layer m-0 h3 text-primary"></i>
+                                    </span>
+                                </div>
+                                <h6 class="text-muted text-uppercase mt-0">收录量</h6>
+                                <h3 class="my-3">1亿</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="avatar-sm float-right">
+                                    <span class="avatar-title bg-soft-primary rounded-circle">
+                                        <i class="bx bx-dollar-circle m-0 h3 text-primary"></i>
+                                    </span>
+                                </div>
+                                <h6 class="text-muted text-uppercase mt-0">一天收录</h6>
+                                <h3 class="my-3">12万2000</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="avatar-sm float-right">
+                                    <span class="avatar-title bg-soft-primary rounded-circle">
+                                        <i class="bx bx-analyse m-0 h3 text-primary"></i>
+                                    </span>
+                                </div>
+                                <h6 class="text-muted text-uppercase mt-0">一周收录</h6>
+                                <h3 class="my-3">$<span data-plugin="counterup">48万3000</span></h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="avatar-sm float-right">
+                                    <span class="avatar-title bg-soft-primary rounded-circle">
+                                        <i class="bx bx-basket m-0 h3 text-primary"></i>
+                                    </span>
+                                </div>
+                                <h6 class="text-muted text-uppercase mt-0">一月收录</h6>
+                                <h3 class="my-3" data-plugin="counterup">142万</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+                <div class="row">
+
+                    <div class="col-lg-8">
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="dropdown float-right position-relative">
+                                    <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                                       aria-expanded="false">
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#" class="dropdown-item">查看分析</a></li>
+                                        <li><a href="#" class="dropdown-item">查看源数据</a></li>
+                                    </ul>
+                                </div>
+                                <h4 class="card-title d-inline-block">浏览访问记录</h4>
+
+                                <div id="morris-line-example" class="morris-chart" style="height: 320px;"></div>
+
+                                <div class="row text-center mt-4">
+                                    <div class="col-6">
+                                        <h4>172.50万</h4>
+                                        <p class="text-muted mb-0">预估日均IP</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4>1604.25万</h4>
+                                        <p class="text-muted mb-0">预估日均PV</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+
+                    <div class="col-lg-4">
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="dropdown float-right position-relative">
+                                    <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                                       aria-expanded="false">
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#" class="dropdown-item">查看分析</a></li>
+                                        <li><a href="#" class="dropdown-item">查看源数据</a></li>
+                                    </ul>
+                                </div>
+                                <h4 class="card-title d-inline-block">页面浏览比例</h4>
+
+                                <div id="morris-donut-example" class="morris-chart" style="height: 320px;"></div>
+
+                                <div class="row text-center mt-4">
+                                    <div class="col-6">
+                                        <h4>94.95%</h4>
+                                        <p class="text-muted mb-0">近月网站访问比例</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4>70.46%</h4>
+                                        <p class="text-muted mb-0">近月页面访问比例</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+                </div>
+                <!-- end row-->
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <h4 class="card-title d-inline-block mb-3">Top博主榜单</h4>
+                                <div data-simplebar style="max-height: 380px;">
+                                    <a th:each="user:${users}" th:href="${'https://space.bilibili.com/'+user.id}">
+                                        <div class="w-100">
+                                            <img th:src="${user.face}" class="rounded-circle avatar-sm" style="float: left">
+                                            <div class="mr-3">
+                                                <p class="text-muted font-size-11 mb-0" th:text="${'粉丝量:'+user.fans}" style="float: right"></p>
+                                                <h6 class="mb-1" th:text="${user.name}"></h6>
+                                            </div>
+                                            <p class="text-muted font-size-13 mb-0" th:text="${user.sign}"></p>
+                                        </div>
+                                        <br>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+
+                    <div class="col-lg-8">
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <h4 class="card-title d-inline-block mb-3">总站热门榜单</h4>
+                                <div data-simplebar style="max-height: 380px;">
+                                    <a th:each="top:${tops}" th:href="${top.url}">
+                                        <div class="w-100">
+                                            <span style="float: left" th:text="${top.id}"></span>>
+                                            <div class="mr-3">
+                                                <p class="text-muted font-size-11 mb-0" th:text="${'播放量:'+top.view}" style="float: right"></p>
+                                                <h6 class="mb-1" th:text="${top.topic}"></h6>
+                                            </div>
+                                            <p class="text-muted font-size-13 mb-0" th:text="${'投币量:'+top.like+'点赞量:'+top.coin+'收藏量:'+top.collect}"></p>
+                                        </div>
+                                        <br>
+                                    </a>
+                                </div>
+                            </div>
+                    </div> <!-- end col -->
+
+                </div>
+                <!-- end row-->
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+
+    </div>
+    <!-- end main content-->
+
+</div>
+<!-- END layout-wrapper -->
+
+<!-- Overlay-->
+<div class="menu-overlay"></div>
+
+
+<!-- jQuery  -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/metismenu.min.js"></script>
+<script src="assets/js/waves.js"></script>
+<script src="assets/js/simplebar.min.js"></script>
+
+<!-- Morris Js-->
+<script src="plugins/morris-js/morris.min.js"></script>
+<!-- Raphael Js-->
+<script src="plugins/raphael/raphael.min.js"></script>
+
+<!-- Morris Custom Js-->
+<script src="assets/pages/dashboard-demo.js"></script>
+
+<!-- App js -->
+<script src="assets/js/theme.js"></script>
+
+</body>
+
+</html>

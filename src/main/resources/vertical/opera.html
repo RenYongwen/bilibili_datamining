@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Dashboard Template for Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Custom styles for this template -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/metismenu.min.js"></script>
+    <script src="assets/js/waves.js"></script>
+    <script src="assets/js/simplebar.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="assets/js/echarts.min.js"></script>
+
+    <!-- Google Charts js -->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- Google chart custom js-->
+    <script src="assets/pages/google-chart-demo.js"></script>
+
+
+    <!-- App js -->
+    <script src="assets/js/theme.js"></script>
+    <style type="text/css">
+        /* Chart.js */
+
+        @-webkit-keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        .chartjs-render-monitor {
+            -webkit-animation: chartjs-render-animation 0.001s;
+            animation: chartjs-render-animation 0.001s;
+        }
+    </style>
+</head>
+
+<body>
+<div id="layout-wrapper">
+    <div th:insert="bar::left"></div>
+    <header th:insert="bar::#page-topbar"></header>
+    <footer th:insert="bar::#page-footer"></footer>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="main-content">
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card card-animate">
+                                    <div class="card-body" >
+                                        <div class="dropdown float-right position-relative">
+                                            <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                                               aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a href="#" class="dropdown-item">查看源数据</a></li>
+                                                <li class="dropdown-divider"></li>
+                                                <li><a href="/charts_tag.do" class="dropdown-item">查看分析</a></li>
+                                            </ul>
+                                        </div>
+                                        <h4 class="card-title d-inline-block">各评分番剧数量</h4>
+                                        <div id="main" style="width: 950px; height: 600px;"></div>
+                                        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+                                        <script type="text/javascript">
+                                            $(function(){//页面加载时就会执行该函数
+
+                                                var chartDom = document.getElementById('main');
+                                                var myecharts = echarts.init(chartDom);
+                                                var scores = new Array();
+                                                var numbers = new Array();
+                                                $.get("/opera1",function (data) {
+
+                                                    for(i=0;i<data.length;i++){
+                                                        scores.push(data[i].score);
+                                                        numbers.push(data[i].num);
+                                                    }
+                                                    var option;
+                                                    option = {
+                                                        tooltip: {
+                                                            trigger: 'axis',
+
+                                                        },
+                                                        xAxis: [
+                                                            {
+                                                                type: 'category',
+                                                                data: scores,
+                                                                axisTick: {
+                                                                    alignWithLabel: true
+                                                                }
+                                                            }
+                                                        ],
+                                                        yAxis: [
+                                                            {
+                                                                type: 'value'
+                                                            }
+                                                        ],
+                                                        series: [
+                                                            {
+                                                                name: '数量',
+                                                                type: 'bar',
+                                                                barWidth: '60%',
+                                                                data: numbers
+                                                            }
+                                                        ],
+                                                    };
+                                                    myecharts.setOption(option);
+                                                },"json")
+                                            })
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card card-animate">
+                                    <div class="card-body" >
+                                        <div class="dropdown float-right position-relative">
+                                            <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                                               aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a href="#" class="dropdown-item">查看源数据</a></li>
+                                                <li class="dropdown-divider"></li>
+                                                <li><a href="/charts_tag.do" class="dropdown-item">查看分析</a></li>
+                                            </ul>
+                                        </div>
+                                        <h4 class="card-title d-inline-block">过亿播放量番剧播放量及评分</h4>
+                                        <div id="main1" style="width: 950px; height: 600px;"></div>
+                                        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+                                        <script type="text/javascript">
+                                            $(function(){//页面加载时就会执行该函数
+
+                                                var chartDom = document.getElementById('main1');
+                                                var myecharts = echarts.init(chartDom);
+                                                var names = new Array();
+                                                var viewss = new Array();
+                                                var scores = new Array();
+                                                $.get("/opera2",function (data) {
+
+                                                    for(i=0;i<data.length;i++){
+                                                        names.push(data[i].name);
+                                                        viewss.push(data[i].views);
+                                                        scores.push(data[i].score);
+
+                                                    }
+                                                    var option;
+                                                    option = {
+                                                        tooltip: {
+                                                            trigger: 'axis',
+                                                            axisPointer: {type: 'shadow'}
+                                                        },
+                                                        xAxis: [
+                                                            {
+                                                                type: 'category',
+                                                                data: names,
+                                                                axisTick: {
+                                                                    alignWithLabel: true
+                                                                },
+                                                                show: false
+
+
+                                                            }
+                                                        ],
+                                                        yAxis: [
+                                                            {
+                                                                type: 'value',
+                                                                name: '播放量',
+                                                                min: 0,
+                                                                max: 700000000,
+                                                                interval: 50000000,
+                                                                axisLabel: {formatter: '{value} 次'}
+                                                            },
+                                                            {
+                                                                type: 'value',
+                                                                name: '评分',
+                                                                min: 0,
+                                                                max: 10,
+                                                                interval: 0.5,
+
+                                                            }
+                                                        ],
+                                                        series: [
+                                                            {
+                                                                name: '播放量',
+                                                                type: 'bar',
+                                                                barWidth: '60%',
+                                                                data: viewss
+                                                            },
+                                                            {
+                                                                name: '评分',
+                                                                type: 'line',
+                                                                yAxisIndex: 1,
+                                                                data: scores
+                                                            }
+                                                        ],
+                                                    };
+                                                    myecharts.setOption(option);
+                                                },"json")
+                                            })
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card card-animate">
+                                    <div class="card-body" >
+                                        <div class="dropdown float-right position-relative">
+                                            <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                                               aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a href="#" class="dropdown-item">查看源数据</a></li>
+                                                <li class="dropdown-divider"></li>
+                                                <li><a href="/charts_tag.do" class="dropdown-item">查看分析</a></li>
+                                            </ul>
+                                        </div>
+                                        <h4 class="card-title d-inline-block">B站番剧点赞投币比例</h4>
+                                        <div id="main3" style="width: 950px; height: 600px;"></div>
+                                        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+                                        <script type="text/javascript">
+                                            $(function(){//页面加载时就会执行该函数
+
+                                                var chartDom = document.getElementById('main3');
+                                                var myecharts = echarts.init(chartDom);
+                                                var names = new Array();
+                                                var likess = new Array();
+                                                var coinss = new Array();
+
+                                                $.get("/opera3",function (data) {
+
+                                                    for(i=0;i<data.length;i++){
+                                                        names.push(data[i].name);
+                                                        likess.push(data[i].likes);
+                                                        coinss.push(data[i].coins);
+
+
+                                                    }
+                                                    var option;
+                                                    option = {
+                                                        tooltip: {
+                                                            trigger: 'axis',
+
+                                                        },
+                                                        xAxis: [
+                                                            {
+                                                                type: 'category',
+                                                                data: names,
+                                                                axisTick: {
+                                                                    alignWithLabel: true
+                                                                },
+                                                                show: false
+                                                            }
+                                                        ],
+                                                        yAxis: [
+                                                            {
+                                                                type: 'value',
+
+                                                                min: 0,
+                                                                max: 9000000,
+                                                                interval: 500000,
+
+                                                            }
+
+                                                        ],
+                                                        series: [
+                                                            {
+                                                                name: '点赞量',
+                                                                type: 'line',
+                                                                areaStyle: {},
+                                                                emphasis: {foucs: 'series'},
+                                                                data: likess
+                                                            },
+                                                            {
+                                                                name: '投币量',
+                                                                type: 'line',
+                                                                areaStyle: {},
+                                                                emphasis: {foucs: 'series'},
+                                                                data: coinss
+                                                            }
+                                                        ],
+                                                    };
+                                                    myecharts.setOption(option);
+                                                },"json")
+                                            })
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card card-animate">
+                                    <div class="card-body" >
+                                        <div class="dropdown float-right position-relative">
+                                            <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                                               aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a href="#" class="dropdown-item">查看源数据</a></li>
+                                                <li class="dropdown-divider"></li>
+                                                <li><a href="/charts_tag.do" class="dropdown-item">查看分析</a></li>
+                                            </ul>
+                                        </div>
+                                        <h4 class="card-title d-inline-block">各番剧追番量</h4>
+                                        <div id="main4" style="width: 950px; height: 600px;"></div>
+                                        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+                                        <script type="text/javascript">
+                                            $(function(){//页面加载时就会执行该函数
+
+                                                var chartDom = document.getElementById('main4');
+                                                var myecharts = echarts.init(chartDom);
+                                                var names = new Array();
+                                                var follows = new Array();
+
+                                                $.get("/opera4",function (data) {
+
+                                                    for(i=0;i<data.length;i++){
+                                                        names.push(data[i].name);
+                                                        follows.push(data[i].follow);
+
+
+                                                    }
+                                                    var option;
+                                                    option = {
+                                                        tooltip: {
+                                                            trigger: 'axis',
+                                                            axisPointer: {type: 'shadow'}
+                                                        },
+                                                        xAxis: [
+                                                            {
+                                                                type: 'category',
+                                                                data: names,
+                                                                axisTick: {
+                                                                    alignWithLabel: true
+                                                                },
+                                                                show: false
+
+
+                                                            }
+                                                        ],
+                                                        yAxis: [
+                                                            {
+                                                                type: 'value',
+                                                                name: '追番数',
+                                                                min: 0,
+                                                                max: 11000000,
+                                                                interval: 500000,
+
+
+                                                            }
+                                                        ],
+                                                        series: [
+                                                            {
+                                                                name: '追番数',
+                                                                type: 'bar',
+                                                                barWidth: '60%',
+                                                                data: follows
+                                                            }
+
+                                                        ],
+                                                    };
+                                                    myecharts.setOption(option);
+                                                },"json")
+                                            })
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+
+</body>
+
+</html>

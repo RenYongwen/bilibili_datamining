@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>频道信息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="MyraStudio" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="assets/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="assets/js/echarts.min.js"></script>
+
+    <!-- Plugins css -->
+    <link href="plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="plugins/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="plugins/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="plugins/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+
+<body>
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        <div th:insert="bar::left"></div>
+        <header th:insert="bar::#page-topbar"></header>
+        <footer th:insert="bar::#page-footer"></footer>
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <div class="col-lg-12">
+                         <div class="card card-animate">
+                            <div class="card-body" >
+                                <div class="dropdown float-right position-relative">
+                                    <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                                        aria-expanded="false">
+                                        <i class="mdi mdi-dots-vertical"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#" class="dropdown-item">查看源数据</a></li>
+                                        <li class="dropdown-divider"></li>
+                                        <li><a href="/charts_tag.do" class="dropdown-item">查看分析</a></li>
+                                    </ul>
+                                </div>
+                                <h4 class="card-title d-inline-block">频道热度图</h4>
+                                <div id="main1" class="morris-chart" style="height: 800px;"></div>
+                                <script type="text/javascript">
+                                    $(function () { //页面加载的时候就会执行该函数。
+                                        var myecharts =echarts.init(document.getElementById("main1"));
+                                        var values = [];
+                                        $.get("/charts_tag.do",function (data) {
+                                            for (i=0;i<data.length;i++){
+                                                var obj = new Object();
+                                                obj.name = data[i].name;
+                                                obj.value = data[i].subscribed_count;
+                                                values[i] = obj;
+                                            }
+                                            var option = {
+                                                tooltip: {
+                                                    trigger: 'item'
+                                                },
+                                                series: [
+                                                    {
+                                                        type: 'pie',
+                                                        data: values,
+                                                    }
+                                                ]};
+                                            myecharts.setOption(option);
+                                        },"json")
+                                    })
+                                </script>
+
+                                <div class="row text-center mt-4">
+                                    <div class="col-6">
+                                        <h4>5,459</h4>
+                                        <p class="text-muted mb-0">总活跃度</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <h4>96</h4>
+                                        <p class="text-muted mb-0">频道数</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+                    <!-- end row-->
+
+                    <div class="row">
+
+                        <div class="col-lg-12">
+                             <div class="card card-animate">
+                                <div class="card-body">
+                                    <div class="dropdown float-right position-relative">
+                                        <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="#" class="dropdown-item">Action</a></li>
+                                            <li><a href="#" class="dropdown-item">Another action</a></li>
+                                            <li><a href="#" class="dropdown-item">Something else here</a></li>
+                                            <li class="dropdown-divider"></li>
+                                            <li><a href="#" class="dropdown-item">Separated link</a></li>
+                                        </ul>
+                                    </div>
+                                    <h4 class="card-title d-inline-block">频道信息</h4>
+
+                                    <div class="table-responsive" style="max-height: 380px;">
+                                        <table class="table table-borderless table-hover mb-0">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th>频道</th>
+                                                    <th>订阅数</th>
+                                                    <th>视频数/万个</th>
+                                                    <th>观看数/亿次</th>
+                                                    <th>精选视频数/个</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="tag:${tags}" >
+                                                    <th th:text="${tag.name}"></th>
+                                                    <td th:text="${tag.subscribed_count}"></td>
+                                                    <td th:text="${tag.archive_count}"></td>
+                                                    <td th:text="${tag.view_count}"></td>
+                                                    <td th:text="${tag.featured_count}"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div> <!-- end col -->
+
+                    </div>
+                    <!-- end row-->
+
+                </div> <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+    <!-- Overlay-->
+    <div class="menu-overlay"></div>
+
+
+    <!-- jQuery  -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/metismenu.min.js"></script>
+    <script src="assets/js/waves.js"></script>
+    <script src="assets/js/simplebar.min.js"></script>
+
+    <!-- Morris Js-->
+    <script src="plugins/morris-js/morris.min.js"></script>
+    <!-- Raphael Js-->
+    <script src="plugins/raphael/raphael.min.js"></script>
+
+    <!-- Morris Custom Js-->
+    <script src="assets/pages/dashboard-demo.js"></script>
+
+    <!-- App js -->
+    <script src="assets/js/theme.js"></script>
+
+</body>
+
+</html>

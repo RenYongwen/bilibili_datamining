@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Dashboard Template for Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+    <link href="asserts/css/bootstrap.min.css" rel="stylesheet">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <!-- App css -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Custom styles for this template -->
+    <!--    <link href="asserts/css/dashboard.css" rel="stylesheet">-->
+    <script type="text/javascript" th:src="@{assets/js/jquery-1.10.2.min.js}"></script>
+    <script type="text/javascript" th:src="@{assets/js/echarts.min.js}"></script>
+    <!--    <script type="text/javascript" th:src="@{assets/js/echarts-wordcloud.js}"></script>-->
+    <style type="text/css">
+        /* Chart.js */
+
+        @-webkit-keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        .chartjs-render-monitor {
+            -webkit-animation: chartjs-render-animation 0.001s;
+            animation: chartjs-render-animation 0.001s;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<div id="layout-wrapper">
+    <div th:insert="bar::left"></div>
+    <header th:insert="bar::#page-topbar"></header>
+    <footer th:insert="bar::#page-footer"></footer>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="main-content">
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card card-animate">
+                                    <div class="card-body" >
+                                        <div class="dropdown float-right position-relative">
+                                            <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                                               aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a href="#" class="dropdown-item">查看源数据</a></li>
+                                                <li class="dropdown-divider"></li>
+                                                <li><a href="/charts_tag.do" class="dropdown-item">查看分析</a></li>
+                                            </ul>
+                                        </div>
+                                        <h4 class="card-title d-inline-block">活动举办城市分布</h4>
+                                        <div id="main4" style="width: 950px; height: 200px;"></div>                                <div id="main" style="width: 600px;height: 400px;"></div>
+                                        <script type="text/javascript">
+                                            $(function () {//页面加载就执行该函数
+                                                var myecharts=echarts.init(document.getElementById("main"));
+                                                var citys=new Array();
+                                                var nums=new Array();
+                                                $.get("/getShowPlaceNum.do",function (data) {
+                                                    console.log(data)
+                                                    for(i=0;i<data.length;i++){
+                                                        citys.push(data[i].city);
+                                                        nums.push(data[i].num);
+                                                    }
+                                                    option = {
+                                                        color:["#877de8"],
+                                                        tooltip: {
+                                                            trigger: 'axis',
+                                                            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                                                                type: 'line'        // 默认为直线，可选为：'line' | 'shadow'
+                                                            }
+                                                        },
+                                                        grid: {
+                                                            left: '3%',
+                                                            right: '4%',
+                                                            bottom: '3%',
+                                                            containLabel: true
+                                                        },
+                                                        xAxis: [
+                                                            {
+                                                                type: 'category',
+                                                                data: citys,
+                                                                axisTick: {
+                                                                    alignWithLabel: true
+                                                                }
+                                                            }
+                                                        ],
+                                                        yAxis: [
+                                                            {
+                                                                type: 'value'
+                                                            }
+                                                        ],
+                                                        series: [
+                                                            {
+                                                                name: '活动次数',
+                                                                type: 'bar',
+                                                                barWidth: '60%',
+                                                                data: nums
+                                                            }
+                                                        ]
+                                                    };
+                                                    myecharts.setOption(option);
+                                                },"json")
+
+                                            })
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card card-animate">
+                                    <div class="card-body" >
+                                        <div class="dropdown float-right position-relative">
+                                            <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                                               aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a href="#" class="dropdown-item">查看源数据</a></li>
+                                                <li class="dropdown-divider"></li>
+                                                <li><a href="/charts_tag.do" class="dropdown-item">查看分析</a></li>
+                                            </ul>
+                                        </div>
+                                        <h4 class="card-title d-inline-block">各个城市票价分布</h4>
+                                        <div id="main2" style="width: 950px;height: 600px;"></div>
+                                        <script type="text/javascript">
+                                            $(function () {//页面加载就执行该函数
+                                                var myecharts=echarts.init(document.getElementById("main2"));
+                                                var citys=new Array();
+                                                var cityprices=new Array();
+                                                $.get("/getShowAvgprice.do",function (data) {
+                                                    console.log(data)
+                                                    for(i=0;i<data.length;i++){
+                                                        citys.push(data[i].city);
+                                                        cityprices.push(data[i].cityprice);
+                                                    }
+                                                    option = {
+                                                        color:["#877de8"],
+                                                        tooltip: {
+                                                            trigger: 'axis',
+                                                            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                                                                type: 'line'        // 默认为直线，可选为：'line' | 'shadow'
+                                                            }
+                                                        },
+                                                        xAxis: {
+                                                            type: 'category',
+                                                            data: citys
+                                                        },
+                                                        yAxis: {
+                                                            type: 'value'
+                                                        },
+                                                        series: [{
+                                                            name:'平均票价',
+                                                            data: cityprices,
+                                                            type: 'line'
+                                                        }]
+                                                    };
+                                                    myecharts.setOption(option);
+                                                },"json")
+
+                                            })
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card card-animate">
+                                    <div class="card-body" >
+                                        <div class="dropdown float-right position-relative">
+                                            <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                                               aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a href="#" class="dropdown-item">查看源数据</a></li>
+                                                <li class="dropdown-divider"></li>
+                                                <li><a href="/charts_tag.do" class="dropdown-item">查看分析</a></li>
+                                            </ul>
+                                        </div>
+                                        <div id="main1" style="width: 950px;height: 600px;"></div>
+                                        <script type="text/javascript">
+                                            $(function () {//页面加载就执行该函数
+                                                var myecharts=echarts.init(document.getElementById("main1"));
+                                                var citys=new Array();
+                                                var nums=new Array();
+                                                var serieslist=[];
+                                                $.get("/getMainShowCity.do",function (data) {
+                                                    console.log(data)
+                                                    for(i=0;i<data.length;i++){
+                                                        citys.push(data[i].city);
+                                                        nums.push(data[i].num);
+                                                        serieslist.push({name:data[i].city,value:data[i].num});
+                                                    }
+                                                    option = {
+                                                        color:["#574bd6", "#6d61ea", "#877de8", "#af94da", "#c5bff5","#AF94DAFF","#94BEDAFF"],
+                                                        title: {
+                                                            text: '主要主办城市',
+                                                            subtext: '仅含活动数大于2的城市',
+                                                            left: 'center'
+                                                        },
+                                                        tooltip: {
+                                                            trigger: 'item'
+                                                        },
+                                                        legend: {
+                                                            orient: 'vertical',
+                                                            left: 'left',
+                                                        },
+                                                        series: [
+                                                            {
+                                                                name: '活动次数',
+                                                                type: 'pie',
+                                                                radius: '50%',
+                                                                data:
+                                                                serieslist
+                                                                ,
+                                                                emphasis: {
+                                                                    itemStyle: {
+                                                                        shadowBlur: 10,
+                                                                        shadowOffsetX: 0,
+                                                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    };
+                                                    myecharts.setOption(option);
+                                                },"json")
+                                            })
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card card-animate">
+                                    <div class="card-body" >
+                                        <div class="dropdown float-right position-relative">
+                                            <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
+                                               aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a href="#" class="dropdown-item">查看源数据</a></li>
+                                                <li class="dropdown-divider"></li>
+                                                <li><a href="/charts_tag.do" class="dropdown-item">查看分析</a></li>
+                                            </ul>
+                                        </div>
+                                        <div id="mainprice" style="width: 950px;height: 600px;">
+                                        </div>
+                                        <script type="text/javascript">
+                                            $(function () {//页面加载就执行该函数
+                                                var myecharts = echarts.init(document.getElementById("mainprice"));
+                                                var names = new Array();
+                                                var minprices = new Array();
+                                                var maxprices = new Array();
+                                                var avglows = new Array();
+                                                var avghighs = new Array();
+                                                // var lists=[];
+                                                $.get("/getMaxMinPrice.do", function (data) {
+                                                    console.log(data)
+                                                    for (i = 0; i < data.length; i++) {
+                                                        names.push(data[i].name);
+                                                        minprices.push(data[i].minprice);
+                                                        maxprices.push(data[i].maxprice);
+                                                        avglows.push(data[i].avglow);
+                                                        avghighs.push(data[i].avghigh);
+                                                        // lists.push([data[i].avglow,data[i].avghigh,data[i].minprice,data[i].maxprigh]);
+
+                                                    }
+                                                    option = {
+                                                        color:["#665ee7","#ea38e7"],
+                                                        title: {
+                                                            text: '主要城市票价范围',
+                                                            subtext: '仅含主要城市'
+                                                        },
+                                                        tooltip: {
+                                                            trigger: 'axis',
+                                                            axisPointer: {
+                                                                type: 'shadow'
+                                                            }
+                                                        },
+                                                        legend: {
+                                                            data: ['最低价', '最高价']
+                                                        },
+                                                        grid: {
+                                                            left: '3%',
+                                                            right: '4%',
+                                                            bottom: '3%',
+                                                            containLabel: true
+                                                        },
+                                                        xAxis: {
+                                                            type: 'value',
+                                                            boundaryGap: [0, 0.01]
+                                                        },
+                                                        yAxis: {
+                                                            type: 'category',
+                                                            data: names
+                                                        },
+                                                        series: [
+
+                                                            {
+                                                                color:["#ff5d7d"],
+                                                                name: '2011年',
+                                                                type: 'bar',
+                                                                data: minprices
+                                                            },
+                                                            {
+                                                                color:["#74c9e5"],
+                                                                name: '2012年',
+                                                                type: 'bar',
+                                                                data: maxprices
+                                                            }
+                                                        ]
+                                                    };
+                                                    myecharts.setOption(option);
+                                                },"json")
+                                            })
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
